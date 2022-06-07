@@ -91,6 +91,7 @@ www-data ALL=(root) NOPASSWD: /usr/bin/systemctl restart bacula-fd
 www-data ALL=(root) NOPASSWD: /etc/bacula/scripts/mtx-changer
 " > /etc/sudoers.d/baculum
 
+groupadd bacula
 usermod -aG bacula www-data
 chown -R www-data:bacula /etc/bacula/working /etc/bacula
 chmod -R g+rwx /etc/bacula/working /etc/bacula
@@ -100,5 +101,7 @@ service apache2 restart
 
 server_ip=$(ip route get 8.8.8.8 | awk 'NR==1 {print $NF}')
 
-echo "Bacula Director: Try to access Bacula's Console from the shell with command: bconsole"
-echo "Baculum: Access and configure API at http://$server_ip:9096/ (admin-admin) then configure Baculum http://$server_ip:9095/"
+echo "======= Bacula Director: ======="
+echo "Try to access Bacula's Console from the shell with command: bconsole"
+echo "======= Baculum API and Web: ======="
+echo "Access and configure API at http://$server_ip:9096/ (admin-admin) then configure Baculum http://$server_ip:9095/"
