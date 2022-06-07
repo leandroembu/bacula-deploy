@@ -1,4 +1,5 @@
 #!/bin/env bash
+debian_version="bullseye"
 bacula_version="11.0.6"
 job_email="leandroramos@disroot.org"
 host="bacula.example.com"
