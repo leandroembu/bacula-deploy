@@ -52,6 +52,7 @@ make -j8 && make install && make install-autostart
 
 #=================================================================
 # Create PostgreSQL database and grant privileges
+# TODO: avoid using trust in pg_hba.conf
 sed -i 's/peer/trust/g; s/ident/trust/g; s/md5/trust/g' /etc/postgresql/${pg_version}/main/pg_hba.conf
 service postgresql restart
 cp /etc/bacula/scripts/* /tmp
