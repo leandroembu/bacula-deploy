@@ -51,11 +51,10 @@ make -j8 && make install && make install-autostart
 
 #=================================================================
 # Create PostgreSQL database and grant privileges
-postgresql-setup initdb
 sed -i 's/peer/trust/g' /etc/postgresql/${pg_version}/main/pg_hba.conf
 sed -i 's/ident/trust/g' /etc/postgresql/${pg_version}/main/pg_hba.conf
-service postgresql start
-chkconfig postgresql on
+sed -i 's/md5/trust/g' /etc/postgresql/${pg_version}/main/pg_hba.conf
+service postgresql restart
 cp /etc/bacula/scripts/* /tmp
 chmod o+rx /tmp/*
 sudo -u postgres /tmp/create_postgresql_database
