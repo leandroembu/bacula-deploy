@@ -5,7 +5,7 @@ bacula_version="11.0.6"
 export DEBIAN_FRONTEND=noninteractive
 
 # Dependencies
-apt-get install -y build-essential zlib1g-dev liblzo2-dev libacl1-dev libssl-dev
+apt-get update && apt-get install -y build-essential zlib1g-dev liblzo2-dev libacl1-dev libssl-dev
 # Source code download
 wget -qO- https://ufpr.dl.sourceforge.net/project/bacula/bacula/${bacula_version}/bacula-${bacula_version}.tar.gz | tar -xzvf - -C /usr/src
 #==================================================================

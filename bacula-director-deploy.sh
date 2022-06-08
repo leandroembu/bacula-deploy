@@ -12,7 +12,7 @@ db_port="5432"
 export DEBIAN_FRONTEND=noninteractive
 
 # Dependencies
-apt-get install -y build-essential libreadline6-dev zlib1g-dev liblzo2-dev mt-st mtx postfix libacl1-dev libssl-dev postgresql-server-dev-${pg_version} postgresql-${pg_version}
+apt-get update && apt-get install -y build-essential libreadline6-dev zlib1g-dev liblzo2-dev mt-st mtx postfix libacl1-dev libssl-dev postgresql-server-dev-${pg_version} postgresql-${pg_version}
 # Source code download
 wget -qO- https://ufpr.dl.sourceforge.net/project/bacula/bacula/${bacula_version}/bacula-${bacula_version}.tar.gz | tar -xzvf - -C /usr/src
 #==================================================================
