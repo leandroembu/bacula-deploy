@@ -66,3 +66,11 @@ Create user and password to Baculum Web Panel access
 
 
 Now configure passwords for bacula-dir, bacula-sd, etc.
+
+## Bacula Client (only bacula-fd service)
+
+After running _bacula-client.sh_, check bacula service status:
+
+`# bacula status`
+
+![Bacula FD service is running](https://user-images.githubusercontent.com/3253741/178519489-4e14e868-1d35-4a71-a4eb-605643ef6b01.png)
