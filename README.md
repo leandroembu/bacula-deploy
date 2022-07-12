@@ -15,5 +15,5 @@ Scripts to deploy bacula and bacula client (bacula-fd) on Debian 11.
 
 ## TODO
 
-[ ] Replace hardcoded Bacula version
-[ ] Replace hardcoded PostgreSQL version
+- [ ] Replace hardcoded Bacula version
+- [ ] Replace hardcoded PostgreSQL version
