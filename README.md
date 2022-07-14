@@ -29,10 +29,7 @@ Tested systems
   - 20.04 (Focal Fossa)
 
 There's no Baculum packages for Ubuntu 22.04 (Jammy Jellyfish).
-If you're using Ubuntu 22.04, replace **os_version** value in **bacula-director-deploy.sh**:
-```
-os_version=focal
-```
+Baculum uses `get_magic_quotes_gpc` function, which was deprecated in PHP 7.4 and REMOVED from PHP 8. It will work in Ubuntu Jammy if you install PHP 7.4 from a third party repo.
 
 ## Bacula Server (Director + Client + Storage + Baculum)
 
