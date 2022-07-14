@@ -29,6 +29,10 @@ Tested systems
   - 20.04 (Focal Fossa)
 
 There's no Baculum packages for Ubuntu 22.04 (Jammy Jellyfish).
+If you're using Ubuntu 22.04, replace **os_version** value in **bacula-director-deploy.sh**:
+```
+os_version=focal
+```
 
 ## Bacula Server (Director + Client + Storage + Baculum)
 
