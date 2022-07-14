@@ -1,6 +1,10 @@
 #!/bin/env bash
 
-bacula_version="11.0.6"
+bacula_version=$(
+	curl -qsL "https://sourceforge.net/projects/bacula/best_release.json" \
+	| sed "s/, /,\n/g" \
+	| sed -rn "/release/,/\}/{ /filename/{ 0,//s/([^0-9]*)([0-9\.]+)([^0-9]*.*)/\2/ p }}"
+)
 
 export DEBIAN_FRONTEND=noninteractive
 
