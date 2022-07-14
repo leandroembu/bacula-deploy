@@ -1,9 +1,14 @@
 #!/bin/env bash
+
+bacula_version=$(
+	curl -qsL "https://sourceforge.net/projects/bacula/best_release.json" \
+	| sed "s/, /,\n/g" \
+	| sed -rn "/release/,/\}/{ /filename/{ 0,//s/([^0-9]*)([0-9\.]+)([^0-9]*.*)/\2/ p }}"
+)
+
 debian_version="bullseye"
-bacula_version="11.0.6"
 job_email="leandroramos@disroot.org"
 host="bacula.example.com"
-pg_version="13"
 db_name="bacula"
 db_user="bacula"
 db_password="bacula"
@@ -12,7 +17,7 @@ db_port="5432"
 export DEBIAN_FRONTEND=noninteractive
 
 # Dependencies
-apt-get update && apt-get install -y build-essential libreadline6-dev zlib1g-dev liblzo2-dev mt-st mtx postfix libacl1-dev libssl-dev postgresql-server-dev-${pg_version} postgresql-${pg_version}
+apt-get update && apt-get install -y build-essential libreadline6-dev zlib1g-dev liblzo2-dev mt-st mtx postfix libacl1-dev libssl-dev postgresql-server-dev-all postgresql
 # Source code download
 wget -qO- https://ufpr.dl.sourceforge.net/project/bacula/bacula/${bacula_version}/bacula-${bacula_version}.tar.gz | tar -xzvf - -C /usr/src
 #==================================================================
@@ -53,7 +58,13 @@ make -j8 && make install && make install-autostart
 #=================================================================
 # Create PostgreSQL database and grant privileges
 # TODO: avoid using trust in pg_hba.conf
-sed -i 's/peer/trust/g; s/ident/trust/g; s/md5/trust/g' /etc/postgresql/${pg_version}/main/pg_hba.conf
+
+pg_hba_path=$(su - postgres -c \
+        "psql -t -P format=unaligned -c 'SHOW config_file';" \
+        | sed 's/postgresql.conf/pg_hba.conf/g'
+)
+
+sed -i 's/peer/trust/g; s/ident/trust/g; s/md5/trust/g' $pg_hba_path
 service postgresql restart
 cp /etc/bacula/scripts/* /tmp
 chmod o+rx /tmp/*
