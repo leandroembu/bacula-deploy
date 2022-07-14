@@ -4,8 +4,11 @@ Scripts to deploy bacula and bacula client (bacula-fd) on Debian 11.
 
 ## TODO
 
-- [ ] Replace hardcoded Bacula version
-- [ ] Replace hardcoded PostgreSQL version
+- [x] Replace hardcoded Bacula version
+- [x] Replace hardcoded PostgreSQL version
+- [x] Make scripts Debian/Ubuntu agnostic
+- [ ] Create a separate script for Baculum Web
+- [ ] Create Docker images to deploy Bacula services
 
 ## Scripts
 
@@ -17,8 +20,15 @@ Scripts to deploy bacula and bacula client (bacula-fd) on Debian 11.
 
 ## Requirements
 
-- Debian 11 Bullseye
-- For Ubuntu you must change pg_version variable (yes, it's hardcoded :( )
+Tested systems
+- Debian:
+  - 11 (Bullseye)
+  - 10 (Buster)
+- Ubuntu:
+  - 18.04 (Bionic Beaver)
+  - 20.04 (Focal Fossa)
+
+There's no Baculum packages for Ubuntu 22.04 (Jammy Jellyfish).
 
 ## Bacula Server (Director + Client + Storage + Baculum)
 

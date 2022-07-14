@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 # Load os-release variables
 . /etc/os-release

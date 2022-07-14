@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 bacula_version=$(
 	curl -qsL "https://sourceforge.net/projects/bacula/best_release.json" \
