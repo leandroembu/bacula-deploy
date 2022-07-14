@@ -1,6 +1,6 @@
 # Bacula Deploy
 
-Scripts to deploy bacula and bacula client (bacula-fd) on Debian 11.
+Scripts to deploy bacula and bacula client (bacula-fd) on Debian and Ubuntu.
 
 ## TODO
 
@@ -25,8 +25,8 @@ Tested systems
   - 11 (Bullseye)
   - 10 (Buster)
 - Ubuntu:
-  - 18.04 (Bionic Beaver)
   - 20.04 (Focal Fossa)
+  - 18.04 (Bionic Beaver)
 
 There's no Baculum packages for Ubuntu 22.04 (Jammy Jellyfish).
 Baculum uses `get_magic_quotes_gpc` function, which was deprecated in PHP 7.4 and REMOVED from PHP 8. It will work in Ubuntu Jammy if you install PHP 7.4 from a third party repo.
