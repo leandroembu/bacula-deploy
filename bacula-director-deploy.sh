@@ -1,12 +1,16 @@
 #!/bin/env bash
 
+# Load os-release variables
+. /etc/os-release
+
 bacula_version=$(
 	curl -qsL "https://sourceforge.net/projects/bacula/best_release.json" \
 	| sed "s/, /,\n/g" \
 	| sed -rn "/release/,/\}/{ /filename/{ 0,//s/([^0-9]*)([0-9\.]+)([^0-9]*.*)/\2/ p }}"
 )
 
-debian_version="bullseye"
+os=$ID
+os_version=$VERSION_CODENAME
 job_email="leandroramos@disroot.org"
 host="bacula.example.com"
 db_name="bacula"
@@ -79,8 +83,8 @@ service bacula-fd start && service bacula-sd start && service bacula-dir start
 wget -qO - https://www.bacula.org/downloads/baculum/baculum.pub | apt-key add -
 
 echo "
-deb [ arch=amd64 ] https://www.bacula.org/downloads/baculum/stable-11/debian ${debian_version} main
-deb-src https://www.bacula.org/downloads/baculum/stable-11/debian ${debian_version} main
+  deb [ arch=amd64 ] https://www.bacula.org/downloads/baculum/stable-11/${os} ${os_version} main
+  deb-src https://www.bacula.org/downloads/baculum/stable-11/${os} ${os_version} main
 " > /etc/apt/sources.list.d/baculum.list
 
 apt-get update && apt-get install -y php-bcmath php-mbstring baculum-api baculum-api-apache2 baculum-common baculum-web baculum-web-apache2
