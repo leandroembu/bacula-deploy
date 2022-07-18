@@ -7,16 +7,21 @@ Scripts to deploy bacula and bacula client (bacula-fd) on Debian and Ubuntu.
 - [x] Replace hardcoded Bacula version
 - [x] Replace hardcoded PostgreSQL version
 - [x] Make scripts Debian/Ubuntu agnostic
-- [ ] Create a separate script for Baculum Web
+- [x] Create a separate script for Baculum Web
 - [ ] Create Docker images to deploy Bacula services
 
 ## Scripts
 
 - **bacula-director.sh:**
   - Compile and deploy all Bacula services
-  - Deploy Baculum web client
+    - bconsole
+    - bacula-dir
+    - bacula-fd
+    - bacula-sd
 - **bacula-client.sh**
   - Compile and deploy only bacula-fd service
+- **baculum-deploy.sh**
+  - Deploy Baculum web client
 
 ## Requirements
 
@@ -31,13 +36,17 @@ Tested systems
 There's no Baculum packages for Ubuntu 22.04 (Jammy Jellyfish).
 Baculum uses `get_magic_quotes_gpc` function, which was deprecated in PHP 7.4 and REMOVED from PHP 8. It will work in Ubuntu Jammy if you install PHP 7.4 from a third party repo.
 
-## Bacula Server (Director + Client + Storage + Baculum)
+## Bacula Server (Director + Client + Storage)
 
 After running _bacula-director.sh_, test your Bacula Console (the domain must be in /etc/hosts if you're using FQDN):
 
 `# bconsole`
 
 ![bconsole](https://user-images.githubusercontent.com/3253741/178515741-c5092e66-1d6f-415c-a4b9-78aa5ca91a51.png)
+
+## Baculum API + Web
+
+Run baculum-deploy.sh
 
 ### Access Baculum API Config
 
