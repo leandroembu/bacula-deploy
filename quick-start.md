@@ -29,8 +29,6 @@ Após a execução, os serviços deverão responder nas seguintes portas:
 - bacula-dir: 9101
 - bacula-fd: 9102
 - bacula-sd: 9103
-- Baculum API: 9096
-- Baculum Web: 9095
 
 
 ### Testando o Bacula Console
