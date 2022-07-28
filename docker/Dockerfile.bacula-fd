@@ -1,0 +1,37 @@
+FROM debian:stable
+
+ARG DEBIAN_FRONTEND=noninterative
+ARG bacula_version=13.0.0
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+  curl \
+  build-essential \
+  zlib1g-dev \
+  liblzo2-dev \
+  libacl1-dev \
+  libssl-dev \
+  wget
+
+# Download and compile source code
+RUN wget -qO- https://ufpr.dl.sourceforge.net/project/bacula/bacula/${bacula_version}/bacula-${bacula_version}.tar.gz | tar -xzvf - -C /usr/src && \
+  cd /usr/src/bacula* && \
+  ./configure \
+  --enable-client-only \
+  --enable-build-dird=no \
+  --enable-build-stored=no \
+  --bindir=/usr/bin \
+  --sbindir=/usr/sbin \
+  --with-scriptdir=/etc/bacula/scripts \
+  --with-working-dir=/etc/bacula/working \
+  --with-logdir=/var/log \
+  --with-systemd \
+  --enable-smartalloc && \
+  make -j8 && make install && make install-autostart-fd && \
+  service bacula-fd start
+
+VOLUME /etc/bacula
+
+EXPOSE 9102
+
+CMD [ "bacula-fd", "-f" ]
