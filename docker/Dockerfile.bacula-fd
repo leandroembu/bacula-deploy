@@ -34,4 +34,5 @@ VOLUME /etc/bacula
 
 EXPOSE 9102
 
-CMD [ "bacula-fd", "-f" ]
+ENTRYPOINT [ "bacula-fd" ]
+CMD [ "-f", "-c", "/etc/bacula/bacula-fd.conf" ]
