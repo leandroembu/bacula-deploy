@@ -1,0 +1,21 @@
+FROM debian:stable
+
+# Install dependencies
+RUN apt-get update && apt-get install -y wget gnupg2 sudo
+
+# Get GPG key and add APT repository
+RUN wget -qO - https://www.bacula.org/downloads/baculum/baculum.pub | apt-key add - \
+  && echo "deb [ arch=amd64 ] https://www.bacula.org/downloads/baculum/stable-11/debian bullseye main" > /etc/apt/sources.list.d/baculum.list
+
+# Install packages
+RUN apt-get update && apt-get install -y php-bcmath php-mbstring baculum-api baculum-api-apache2 baculum-common baculum-web baculum-web-apache2
+
+# Configure Apache
+RUN a2enmod rewrite && a2ensite baculum-web baculum-api && service apache2 restart
+
+VOLUME /etc/baculum
+
+EXPOSE 9095 9096
+
+ENTRYPOINT ["/usr/sbin/apachectl"]
+CMD ["-D", "FOREGROUND"]
